@@ -1,15 +1,19 @@
 <style>
+  body {
+    margin: 0;
+  }
   #game {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(to bottom, #fefcea, #f1da36);
   }
 
   .obj {
     height: 100px;
     width: 100px;
-    border: 1px solid darkorchid;
+    border: 1px solid #4b4b4b;
     display: inline-block;
     text-align: center;
     font-size: 50px;
@@ -17,36 +21,39 @@
     cursor: pointer;
     overflow: hidden;
     border-radius: 10px;
-    color: darkorchid;
+    color: #4b4b4b;
     background-color: white;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
   }
 
   .obj:hover {
-    background-color: darkorchid;
+    background: linear-gradient(to bottom, #fefcea, #f1da36);
     color: white;
   }
 
   button#refreshBtn {
-    width: 100%;
-    margin: 20px 0;
-    background-color: darkorchid;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+  width: 100%;
+  margin: 20px 0;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
 
-  button#refreshBtn:hover {
-    background-color: purple;
-  }
+button#refreshBtn:hover {
+  background: linear-gradient(to right, #8f94fb, #4e54c8);
+}
 
-  button#refreshBtn.loading {
-    background-color: #ccc;
-    cursor: default;
-  }
+button#refreshBtn.loading {
+  background: #ccc;
+  cursor: default;
+}
+
 
   .modal {
     display: none;
@@ -85,7 +92,7 @@
   #turn {
     font-size: 18px;
     font-weight: bold;
-    color: darkorchid;
+    color: #4b4b4b;
     margin-bottom: 20px;
   }
 </style>
