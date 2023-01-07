@@ -1,60 +1,99 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+
 <style>
-  body {
-    margin: 0;
-  }
-  #game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to bottom, #fefcea, #f1da36);
+  /* General styles */
+  * {
+    box-sizing: border-box;
   }
 
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: #eee;
+  }
+
+  /* Game container */
+  #game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+
+  /* Game board */
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Game cells */
   .obj {
+    background-color: #ddd;
+    border: none;
+    outline: none;
+    font-size: 50px;
+    color: #444;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100px;
     width: 100px;
-    border: 1px solid #4b4b4b;
-    display: inline-block;
-    text-align: center;
-    font-size: 50px;
-    line-height: 1.99;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 10px;
-    color: #4b4b4b;
-    background-color: white;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border: solid #c1c1c1 1px;
   }
 
   .obj:hover {
-    background: linear-gradient(to bottom, #fefcea, #f1da36);
-    color: white;
+    background-color: #ccc;
+    color: #222;
   }
 
+  /* Turn indicator */
+  #turn {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    text-shadow: 0 0 10px #aaa;
+  }
+
+  /* Refresh button */
   button#refreshBtn {
-  width: 100%;
-  margin: 20px 0;
-  background: linear-gradient(to right, #4e54c8, #8f94fb);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease-in-out;
-}
+    width: 100%;
+    margin: 20px 0;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease-in-out;
+  }
 
-button#refreshBtn:hover {
-  background: linear-gradient(to right, #8f94fb, #4e54c8);
-}
+  button#refreshBtn:hover {
+    background-color: #0052cc;
+    color: #eee;
+  }
 
-button#refreshBtn.loading {
-  background: #ccc;
-  cursor: default;
-}
+  button#refreshBtn.loading {
+    background-color: #ccc;
+    cursor: default;
+  }
 
-
+  /* Modal styles */
   .modal {
     display: none;
     position: fixed;
@@ -68,11 +107,13 @@ button#refreshBtn.loading {
   }
 
   .modal-content {
-    background-color: #fefefe;
+    background-color: #fff;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
 
   .close {
@@ -92,29 +133,27 @@ button#refreshBtn.loading {
   #turn {
     font-size: 18px;
     font-weight: bold;
-    color: #4b4b4b;
+    color: #444;
     margin-bottom: 20px;
+    text-shadow: 2px 2px #aaa;
+    text-align: center;
   }
 </style>
 <div id="game">
   <div>
     <div id="turn">It is player X's turn</div>
+    <div id="board">
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+      <span class="obj"></span>
+    </div>
 
-    <div>
-      <span class="obj"></span>
-      <span class="obj"></span>
-      <span class="obj"></span>
-    </div>
-    <div>
-      <span class="obj"></span>
-      <span class="obj"></span>
-      <span class="obj"></span>
-    </div>
-    <div>
-      <span class="obj"></span>
-      <span class="obj"></span>
-      <span class="obj"></span>
-    </div>
     <button id="refreshBtn">Refresh</button>
   </div>
 </div>
@@ -213,7 +252,7 @@ button#refreshBtn.loading {
     objArr.forEach((element) => {
       element.innerHTML = "";
     });
-
+      
     // Reset the current litter and move count
     currentLitter = true;
     moveCount = 0;
