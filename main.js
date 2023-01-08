@@ -32,6 +32,7 @@ function playersModal() {
 
 window.onload = function () {
   playersModal();
+  displayGameHistory();
 };
 
 objArr.forEach((element) => {
@@ -133,6 +134,7 @@ function resetGame() {
 
   // Update the turn display
   updateTurn();
+  displayGameHistory();
 
   // Re-enable the refresh button and remove the loading class
   refreshBtn.disabled = false;
@@ -196,4 +198,98 @@ function addGameResult(result) {
 
   // Update game history in local storage
   localStorage.setItem("gameHistory", JSON.stringify(gameHistory));
+}
+
+// Function to display game history
+function displayGameHistory() {
+  // Get game history from local storage
+  let gameHistory = JSON.parse(localStorage.getItem("gameHistory"));
+
+  // Check if game history is empty
+  if (gameHistory.length === 0) {
+    console.log("No games played yet");
+    return;
+  }
+
+  // Get the element to display the game history
+  const historyContainer = document.getElementById("gameHistory");
+  historyContainer.innerHTML = "";
+  // Create the table
+  const table = document.createElement("table");
+
+  // Create the table header with the player names
+  const headerHed = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+  const player1Header = document.createElement("th");
+  player1Header.textContent = localStorage.getItem("player1");
+  const player2Header = document.createElement("th");
+  player2Header.textContent = localStorage.getItem("player2");
+  headerRow.appendChild(player1Header);
+  headerRow.appendChild(player2Header);
+  headerHed.appendChild(headerRow);
+  table.appendChild(headerHed);
+
+  const tbody = document.createElement("tbody");
+
+  // Create a row for each game result
+  for (const game of gameHistory) {
+    // Create a row for the game result
+    const gameResultRow = document.createElement("tr");
+
+    // Create cells for the player names
+    const player1Cell = document.createElement("td");
+    const player2Cell = document.createElement("td");
+
+    // Set the text content of the cells based on the game result
+    if (game.result === "win") {
+      if(game.player === localStorage.getItem("player1")){
+        player1Cell.textContent = "Won";
+        player1Cell.className = 'win';  
+      }else if(game.player === localStorage.getItem("player2")){
+        player2Cell.textContent = "Won";
+        player2Cell.className = 'win';  
+      }
+    }
+
+    // Add the cells
+    // Add the cells to the row
+    gameResultRow.appendChild(player1Cell);
+    gameResultRow.appendChild(player2Cell);
+
+    // Add the row to the table
+    tbody.appendChild(gameResultRow);
+  }
+  table.appendChild(tbody);
+
+  // Create an object to hold the win counts for each player
+  const winCounts = {
+    [localStorage.getItem("player1")]: 0,
+    [localStorage.getItem("player2")]: 0,
+  };
+
+  // Loop through the game history and count the number of wins for each player
+  for (const game of gameHistory) {
+    if (game.result === "win") {
+      winCounts[game.player]++;
+    }
+  }
+
+  // Create a row for the win counts
+  const winCountFoot = document.createElement("tfoot");
+  const winCountRow = document.createElement("tr");
+  // Create cells for the win counts
+  const player1WinCountCell = document.createElement("td");
+  player1WinCountCell.textContent = winCounts[localStorage.getItem("player1")];
+  const player2WinCountCell = document.createElement("td");
+  player2WinCountCell.textContent = winCounts[localStorage.getItem("player2")];
+  // Add the cells to the row
+  winCountRow.appendChild(player1WinCountCell);
+  winCountRow.appendChild(player2WinCountCell);
+  winCountFoot.appendChild(winCountRow);
+
+  // Add the row to the table
+  table.appendChild(winCountFoot);
+
+  // Add the table to the history container element
+  historyContainer.appendChild(table);
 }
