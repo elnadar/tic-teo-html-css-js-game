@@ -1,0 +1,171 @@
+  /* General styles */
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: #eee;
+  }
+
+  /* Game container */
+  #game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+
+  /* Game board */
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Game cells */
+  .obj {
+    background-color: #ddd;
+    border: none;
+    outline: none;
+    font-size: 50px;
+    color: #444;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    border: solid #c1c1c1 1px;
+  }
+
+  .obj:hover {
+    background-color: #ccc;
+    color: #222;
+  }
+
+  /* Turn indicator */
+  #turn {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    text-shadow: 0 0 10px #aaa;
+  }
+
+  /* Refresh button */
+  button#refreshBtn {
+    width: 100%;
+    margin: 20px 0;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  button#refreshBtn:hover {
+    background-color: #0052cc;
+    color: #eee;
+  }
+
+  button#refreshBtn.loading {
+    background-color: #ccc;
+    cursor: default;
+  }
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Modal input styles */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Modal submit button styles */
+  button#submitBtn {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button#submitBtn:hover {
+    background-color: #45a049;
+  }
+  
+  #turn {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #aaa;
+    text-align: center;
+  }
