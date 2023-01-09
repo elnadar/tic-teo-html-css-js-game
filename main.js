@@ -293,3 +293,19 @@ function displayGameHistory() {
   // Add the table to the history container element
   historyContainer.appendChild(table);
 }
+
+
+
+// Get the delete button
+const deleteBtn = document.getElementById("deleteBtn");
+
+// Add an event listener to the delete button
+deleteBtn.addEventListener("click", function () {
+  // Remove the player names and game history from the local storage
+  localStorage.removeItem("player1");
+  localStorage.removeItem("player2");
+  localStorage.removeItem("gameHistory");
+
+  // Refresh the page
+  window.location.reload();
+});
